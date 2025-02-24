@@ -1,11 +1,12 @@
+import { ProductProvider } from "./context/ProductsContext";
+import ProductsPage from "./pages/ProductsPage";
 
 function App() {
-
   return (
-    <>
-      <h1 className='text-[red]'>Hello!!</h1>
-    </>
-  )
+    <ProductProvider>
+      <ProductsPage />
+    </ProductProvider>
+  );
 }
 
-export default App
+export default App;

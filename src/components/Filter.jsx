@@ -1,11 +1,44 @@
-import { useContext, useState } from "react";
-import { ProductContext } from "../context/ProductsContext";
+import { useEffect, useState } from "react";
 
-function FilterAndSort() {
-  const { products } = useContext(ProductContext);
+function Filter({ products, setFilteredProducts }) {
+  const [selectedCategory, setSelectedCategory] = useState("All");
+  const [selectedPriceRange, setSelectedPriceRange] = useState("");
+
+  //  handle category selection
+  const handleCategoryChange = (event) => {
+    setSelectedCategory(event.target.value);
+  };
+
+  //  handle price range selection
+  const handlePriceChange = (event) => {
+    setSelectedPriceRange(event.target.value);
+  };
+
+  // Filter products whenever the filters change
+  useEffect(() => {
+    const filtered = products.filter((product) => {
+      const matchesCategory =
+        selectedCategory === "All" || product.category === selectedCategory;
+
+      let matchesPrice = true;
+      if (selectedPriceRange) {
+        const price = product.price;
+        if (selectedPriceRange === "1-20")
+          matchesPrice = price >= 1 && price <= 20;
+        if (selectedPriceRange === "21-50")
+          matchesPrice = price >= 21 && price <= 50;
+        if (selectedPriceRange === "51-150")
+          matchesPrice = price >= 51 && price <= 150;
+      }
+
+      return matchesCategory && matchesPrice;
+    });
+
+    setFilteredProducts(filtered);
+  }, [selectedCategory, selectedPriceRange, products, setFilteredProducts]);
 
   return (
-    <div className="flex flex-row text-left ml-6 mt-10 gap-y-9 sm:flex-col ">
+    <div className="flex flex-row text-left ml-6 mt-10 gap-y-9 sm:flex-col">
       <div id="delivery" className="sm:block  hidden">
         <h3>delivary day </h3>
         <input id="delivary" type="radio" />
@@ -57,50 +90,87 @@ function FilterAndSort() {
           <span> & up</span>
         </div>
       </div>
+      {/* Category Filter */}
       <div id="brands" className="mr-3">
         <h3 className="font-bold">Brands</h3>
         <ul>
-          <li>
-            <input id="men" type="radio" />
-            <label htmlFor="men">men&apos;s clothing</label>
-          </li>
-          <li>
-            <input id="women" type="radio" />
-            <label htmlFor="women">women&apos;s clothing</label>
-          </li>
-          <li>
-            <input id="electronics" type="radio" />
-            <label htmlFor="electronics">electronics</label>
-          </li>
-          <li>
-            <input id="jewelery" type="radio" />
-            <label htmlFor="jewelery">jewelery</label>
-          </li>
+          {[
+            "All",
+            "men's clothing",
+            "women's clothing",
+            "electronics",
+            "jewelery",
+          ].map((category) => (
+            <li key={category}>
+              <input
+                type="radio"
+                id={category}
+                name="category"
+                value={category}
+                checked={selectedCategory === category}
+                onChange={handleCategoryChange}
+              />
+              <label htmlFor={category}>{category}</label>
+            </li>
+          ))}
         </ul>
       </div>
+
+      {/* Price Filter */}
       <div id="prices">
         <h3 className="font-bold">Prices</h3>
         <ul>
-          <li className="active">
-            <input id="all" type="radio" />
+          <li>
+            <input
+              type="radio"
+              id="all"
+              name="price"
+              value=""
+              checked={selectedPriceRange === ""}
+              onChange={handlePriceChange}
+            />
             <label htmlFor="all">All</label>
           </li>
           <li>
-            <input id="min" type="radio" />
-            <label htmlFor="min">1 $ - 20 $</label>
+            <input
+              type="radio"
+              id="min"
+              name="price"
+              value="1-20"
+              checked={selectedPriceRange === "1-20"}
+              onChange={handlePriceChange}
+            />
+            <label htmlFor="min">$1 - $20</label>
           </li>
           <li>
-            <input id="med" type="radio" />
-            <label htmlFor="med">21 $ - 50 $</label>
+            <input
+              type="radio"
+              id="med"
+              name="price"
+              value="21-50"
+              checked={selectedPriceRange === "21-50"}
+              onChange={handlePriceChange}
+            />
+            <label htmlFor="med">$21 - $50</label>
           </li>
           <li>
-            <input id="max" type="radio" />
-            <label htmlFor="max">51 $ - 150 $</label>
+            <input
+              type="radio"
+              id="max"
+              name="price"
+              value="51-150"
+              checked={selectedPriceRange === "51-150"}
+              onChange={handlePriceChange}
+            />
+            <label htmlFor="max">$51 - $150</label>
           </li>
         </ul>
       </div>
+
+      {/* Display Filtered Products in ProductList */}
+      {/* <ProductList products={filteredProducts} /> */}
     </div>
   );
 }
 
-export default FilterAndSort;
+export default Filter;

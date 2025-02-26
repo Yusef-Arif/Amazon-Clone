@@ -2,7 +2,7 @@ import { Card } from "flowbite-react";
 
 function ProductCard({ id, image, price, title }) {
   return (
-    <Card className="w-96  sm:w-64   max-w-xs flex flex-col items-center p-2 shadow-lg rounded-lg m-auto">
+    <Card className="w-96  sm:w-64   max-w-xs flex flex-col items-center p-2 shadow-lg rounded-lg m-auto sm:hover:relative top-1.5 transition-all duration-500">
       <img
         src={image}
         alt={title}

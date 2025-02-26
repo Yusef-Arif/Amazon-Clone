@@ -1,17 +1,22 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Register from "./Register";
-import Login from "./Login";
-import { AuthProvider } from "./contexts/AuthContext"; // Import the AuthProvider
+import Register from "./pages/Register";
+import Login from "./pages/Login";
+import ProductsPage from "./pages/ProductsPage";
+import { AuthProvider } from "./contexts/AuthContext";
+import { ProductProvider } from "./contexts/ProductsContext";
 
 function App() {
   return (
     <AuthProvider>
-      <Router>
-        <Routes>
-          <Route path="/register" element={<Register />} />
-          <Route path="/login" element={<Login />} />
-        </Routes>
-      </Router>
+      <ProductProvider>
+        <Router>
+          <Routes>
+            <Route path="/register" element={<Register />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/products" element={<ProductsPage />} />
+          </Routes>
+        </Router>
+      </ProductProvider>
     </AuthProvider>
   );
 }

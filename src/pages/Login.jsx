@@ -1,9 +1,9 @@
-import logo from "./assets/logo.png";
-import { AuthContext } from "./contexts/AuthContext";
-import { validateLogin } from "./utils/validation";
-import loginArrow from "./assets/loginArrow.png";
+import logo from "../assets/logo.png";
+import { AuthContext } from "../contexts/AuthContext";
+import { validateLogin } from "../utils/validation";
+import loginArrow from "../assets/loginArrow.png";
 import { useNavigate } from "react-router-dom";
-import "./style.css";
+import "../style.css";
 import { useContext, useState } from "react";
 
 function Login() {

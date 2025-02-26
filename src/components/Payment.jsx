@@ -31,7 +31,7 @@ const Payment = ({ data }) => {
       </p>
       <p className="blue">Details</p>
       <div className="flex gap-2">
-        <i class="fa-solid fa-location-dot"></i>
+        <i className="fa-solid fa-location-dot"></i>
         <p className="blue">Delivery to Riyadh - Update Location</p>
       </div>
       <p className="font-bold text-[#B12704]">
@@ -41,11 +41,11 @@ const Payment = ({ data }) => {
         <p>Quantity:</p>
         <p className="select-none text-xl">
           <span onClick={() => (quantity > 1 ? setQuantity(quantity - 1) : "")}>
-            <i class="fa-solid fa-minus  cursor-pointer"></i>
+            <i className="fa-solid fa-minus  cursor-pointer"></i>
           </span>{" "}
           {quantity}{" "}
           <span onClick={() => setQuantity(quantity + 1)}>
-            <i class="fa-solid fa-plus cursor-pointer"></i>
+            <i className="fa-solid fa-plus cursor-pointer"></i>
           </span>
         </p>
       </div>

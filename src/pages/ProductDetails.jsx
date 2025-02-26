@@ -5,6 +5,7 @@ import { guarantee } from "../utils/constant";
 import Payment from "../components/Payment";
 import Testimonials from "../components/Testimonials";
 import StarsRate from "../components/StarsRate";
+import "../style.css";
 
 const ProductPage = () => {
   const id = useParams();

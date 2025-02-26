@@ -1,6 +1,8 @@
 import { Card } from "flowbite-react";
+import { useNavigate } from "react-router-dom";
 
 function ProductCard({ id, image, price, title }) {
+  const navigate = useNavigate();
   return (
     <Card className="w-96  sm:w-64   max-w-xs flex flex-col items-center p-2 shadow-lg rounded-lg m-auto">
       <img
@@ -62,7 +64,7 @@ function ProductCard({ id, image, price, title }) {
         <span className="text-2xl font-bold text-gray-900 dark:text-white">
           ${price}
         </span>
-        <button className="mt-3 w-full rounded-lg bg-[#ffcc00] px-4 py-2 text-sm font-medium text-white hover:bg-cyan-800 focus:outline-none focus:ring-2 focus:ring-cyan-300 dark:bg-cyan-600 dark:hover:bg-cyan-700">
+        <button className="mt-3 w-full rounded-lg bg-[#ffcc00] px-4 py-2 text-sm font-medium text-white hover:bg-cyan-800 focus:outline-none focus:ring-2 focus:ring-cyan-300 dark:bg-cyan-600 dark:hover:bg-cyan-700"   onClick={() => navigate(`/products/${id}`)} >
           Add to cart
         </button>
       </div>
